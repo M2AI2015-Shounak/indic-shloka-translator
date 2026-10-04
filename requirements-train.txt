@@ -1,0 +1,7 @@
+-r requirements.txt
+datasets>=2.19,<5
+pyarrow>=14   # reads the Hub's auto-converted Parquet files (script-free dataset loading)
+peft>=0.11,<1
+sacrebleu>=2.4,<3
+evaluate>=0.4,<1
+bitsandbytes>=0.43

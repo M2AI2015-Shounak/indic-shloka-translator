@@ -1,0 +1,1 @@
+"""Colab widget control panel."""

@@ -1,0 +1,8 @@
+Detected language: {detected_language}
+Source text: {source}
+Verse / passage reference: {verse}
+
+Text to translate:
+{shloka}
+
+Return only the JSON object.

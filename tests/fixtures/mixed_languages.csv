@@ -1,0 +1,32 @@
+ID,Source,Verse,Shloka
+M01,Fixture — expected: Assamese,1,মই আজি বজাৰলৈ যাম আৰু কিছু ফল কিনিম।
+M02,Fixture — expected: Bengali,2,আমি আজ বাজারে যাব এবং কিছু ফল কিনব।
+M03,Fixture — expected: Bodo,3,आं दिनै बाजारआव थांगोन आरो मोनसे फिथाइ बायगोन।
+M04,Fixture — expected: Dogri,4,मेरा नां राम ऐ ते मैं जम्मू दा रौहने आला ऐं।
+M05,Fixture — expected: Gujarati,5,હું આજે બજારમાં જઈશ અને થોડાં ફળ ખરીદીશ.
+M06,Fixture — expected: Hindi,6,मैं आज बाज़ार जाऊँगा और कुछ फल खरीदूँगा। यह मेरा घर है।
+M07,Fixture — expected: Kannada,7,ನಾನು ಇಂದು ಮಾರುಕಟ್ಟೆಗೆ ಹೋಗಿ ಕೆಲವು ಹಣ್ಣುಗಳನ್ನು ಖರೀದಿಸುತ್ತೇನೆ.
+M08,Fixture — expected: Kashmiri,8,بٕہ چھُس اَز بازرس گژھان تہٕ کیٚنہہ میوٚہ ہیوان۔
+M09,Fixture — expected: Konkani,9,हांव आयज बाजारांत वतां आनी कांय फळां विकतीं घेतां.
+M10,Fixture — expected: Maithili,10,हम आइ बजार जाएब आ किछु फल कीनब। ओ हमर भाइ अछि।
+M11,Fixture — expected: Malayalam,11,ഞാൻ ഇന്ന് ചന്തയിൽ പോയി കുറച്ച് പഴങ്ങൾ വാങ്ങും.
+M12,Fixture — expected: Manipuri,12,ঐহাক ঙসি কৈথেলদা চৎলগা মহেই খরা লৈগনি।
+M13,Fixture — expected: Manipuri,13,ꯑꯩ ꯉꯁꯤ ꯀꯩꯊꯦꯜꯗ ꯆꯠꯀꯅꯤ꯫
+M14,Fixture — expected: Marathi,14,मी आज बाजारात जाणार आहे आणि काही फळे विकत घेणार आहे.
+M15,Fixture — expected: Nepali,15,म आज बजार जान्छु र केही फलफूल किन्छु। यो मेरो घर हो।
+M16,Fixture — expected: Odia,16,ମୁଁ ଆଜି ବଜାରକୁ ଯିବି ଏବଂ କିଛି ଫଳ କିଣିବି।
+M17,Fixture — expected: Punjabi,17,ਮੈਂ ਅੱਜ ਬਾਜ਼ਾਰ ਜਾਵਾਂਗਾ ਅਤੇ ਕੁਝ ਫਲ ਖਰੀਦਾਂਗਾ।
+M18,Fixture — expected: Sanskrit,18,कर्मण्येवाधिकारस्ते मा फलेषु कदाचन । मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि ॥
+M19,Fixture — expected: Sanskrit,19,কর্মণ্যে঵াধিকারস্তে মা ফলেষু কদাচন । মা কর্মফলহেতুর্ভূর্মা তে সঙ্গোঽস্ত্঵কর্মণি ॥
+M20,Fixture — expected: Sanskrit,20,కర్మణ్యేవాధికారస్తే మా ఫలేషు కదాచన । మా కర్మఫలహేతుర్భూర్మా తే సఙ్గోఽస్త్వకర్మణి ॥
+M21,Fixture — expected: Sanskrit,21,ಕರ್ಮಣ್ಯೇವಾಧಿಕಾರಸ್ತೇ ಮಾ ಫಲೇಷು ಕದಾಚನ । ಮಾ ಕರ್ಮಫಲಹೇತುರ್ಭೂರ್ಮಾ ತೇ ಸಙ್ಗೋಽಸ್ತ್ವಕರ್ಮಣಿ ॥
+M22,Fixture — expected: Sanskrit,22,karmaṇy evādhikāras te mā phaleṣu kadācana | mā karmaphalahetur bhūr mā te saṅgo 'stv akarmaṇi ||
+M23,Fixture — expected: Santali,23,ᱤᱧ ᱫᱚ ᱛᱮᱦᱮᱧ ᱦᱟᱴ ᱛᱮ ᱪᱟᱞᱟᱜ ᱠᱟᱱᱟ ᱾
+M24,Fixture — expected: Sindhi,24,مان اڄ بازار ويندس ۽ ڪجهه ميوا وٺندس.
+M25,Fixture — expected: Tamil,25,நான் இன்று சந்தைக்குச் சென்று சில பழங்களை வாங்குவேன்.
+M26,Fixture — expected: Telugu,26,నేను ఈ రోజు మార్కెట్‌కు వెళ్లి కొన్ని పండ్లు కొంటాను.
+M27,Fixture — expected: English,27,I will go to the market today and buy some fruits for the family.
+M28,Fixture — expected: Urdu,28,میں آج بازار جاؤں گا اور کچھ پھل خریدوں گا۔
+M29,Fixture — expected: French,29,Je vais au marché aujourd'hui et j'achèterai des fruits pour la famille.
+M30,Fixture — expected: Chinese,30,我今天要去市场买一些水果。
+M31,Fixture — expected: NON-LINGUISTIC,31,१२३ ॥ ४५६ ॥

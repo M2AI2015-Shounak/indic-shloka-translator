@@ -1,0 +1,145 @@
+# =============================================================================
+# indic-shloka-translator — runtime configuration
+# Every setting the pipeline uses lives here. It is validated by
+# shloka_translator/config.py (pydantic) when loaded. No secrets belong here:
+# OPENAI_API_KEY and HF_TOKEN are read from Colab Secrets / env / getpass.
+# =============================================================================
+
+paths:
+  repo_root: auto                     # auto-detect from this file's location
+  input_folder: Input_Folder
+  output_folder: Output_Folder
+  log_folder: logs
+  custom_model_dir: models/custom
+  cache_folder: Output_Folder/.cache
+  prompts_folder: config/prompts
+  reference_folder: reference
+  training_data_folder: Training_Data
+
+schema:
+  expected_columns: [ID, Source, Verse, Shloka]
+  allow_extra_columns: false          # strict: any extra/missing/renamed column => file rejected
+  column_name_match: exact_after_strip   # trim whitespace; case-sensitive
+
+input:
+  recursive: false
+  extensions: [".csv", ".xlsx", ".json", ".jsonl"]
+
+runtime:
+  timezone: Asia/Kolkata
+  device: cuda
+  allow_cpu_fallback: false
+  resume_from_checkpoint: true
+  max_records: null                   # int for smoke tests
+  prompt_version: v1                  # part of the cache key
+  log_level: INFO
+
+language_detection:
+  min_confidence: 0.60
+  use_llm_tiebreaker: true            # for low-confidence / Sanskrit-in-regional-script cases
+  tiebreaker_model: gpt-4.1-mini      # falls back to an available Ollama model if no API key
+  use_indiclid: true                  # AI4Bharat IndicLID (primary classifier, if installed)
+  indiclid_dir: Output_Folder/.cache/IndicLID   # where the IndicLID repo + models are placed
+  use_fasttext_fallback: true         # facebook/fasttext-language-identification (NLLB LID)
+  cache_file: Output_Folder/.cache/langid_cache.json
+  # Supported languages: name -> list of internal codes (IndicTrans2/FLORES style).
+  # Remove or add entries here to change what gets processed; everything else is Skipped.
+  supported_languages:
+    Assamese: [asm_Beng]
+    Bengali: [ben_Beng]
+    Bodo: [brx_Deva]
+    Dogri: [doi_Deva]
+    Gujarati: [guj_Gujr]
+    Hindi: [hin_Deva]
+    Kannada: [kan_Knda]
+    Kashmiri: [kas_Arab, kas_Deva]
+    Konkani: [gom_Deva]
+    Maithili: [mai_Deva]
+    Malayalam: [mal_Mlym]
+    Manipuri: [mni_Beng, mni_Mtei]
+    Marathi: [mar_Deva]
+    Nepali: [npi_Deva]
+    Odia: [ory_Orya]
+    Punjabi: [pan_Guru]
+    Sanskrit: [san_Deva]
+    Santali: [sat_Olck]
+    Sindhi: [snd_Arab, snd_Deva]
+    Tamil: [tam_Taml]
+    Telugu: [tel_Telu]
+
+concurrency:
+  openai_max_workers: 8
+  ollama_max_workers: 2               # also sets OLLAMA_NUM_PARALLEL
+  hf_batch_size: 16
+  max_retries: 5
+  request_timeout_s: 180
+  openai_requests_per_minute: 500     # token-bucket rate limiter (requests)
+
+generation:
+  temperature: 0.0
+  seed: 42
+  max_output_tokens: 2048
+  hf_num_beams: 5
+  hf_max_length: 512
+  ollama_num_ctx: 4096
+
+openai:
+  use_responses_api: false            # false = Chat Completions (default); true = Responses API
+
+ollama:
+  host: http://localhost:11434
+  keep_alive: 30m
+  context_headroom_gb: 1.5            # added to approx_vram_gb in the VRAM pre-flight
+
+analysis:
+  # Used when the selected model cannot produce segmentation/word meanings itself (IndicTrans2, custom)
+  helper_model: gpt-4.1-mini          # or an Ollama model name, or "rule_based"
+  helper_fallback_order: [gpt-4.1-mini, "qwen3:30b", rule_based]
+  sanskrit_parser_timeout_s: 20
+
+gpu_monitor:
+  sample_interval_s: 1.0
+  memory_data_rate_factor: 2          # NVML memory clock x 2 (DDR) x bus width / 8 = bandwidth
+
+training:
+  base_model: ai4bharat/indictrans2-indic-en-dist-200M
+  use_lora: false                     # true recommended with indictrans2-indic-en-1B on L4/A100
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  max_pairs_per_language: 20000
+  max_itihasa_pairs: null             # null = all (~93k)
+  learning_rate: 3.0e-5
+  warmup_steps: 500
+  num_epochs: 3
+  label_smoothing: 0.1
+  per_device_batch_size: 16
+  effective_batch_size: 64
+  max_source_tokens: 512
+  save_steps: 500
+  eval_steps: 500
+  early_stopping_patience: 3
+  checkpoint_dir: models/checkpoints  # relative to the repo (on Drive in Colab) — survives disconnects
+  leakage_similarity: 0.9
+  length_ratio_max: 3.0
+  seed: 42
+  use_bpcc: true
+  extra_hf_datasets: []               # [{id: ..., split: train, src_field: ..., tgt_field: ..., lang: san_Deva}]
+
+models:   # the dropdown is built from this registry, in this order
+  "gpt-5.6-sol":   {provider: openai}
+  "gpt-5.6-terra": {provider: openai}
+  "gpt-5.1":       {provider: openai}
+  "gpt-5":         {provider: openai}
+  "gpt-4.1":       {provider: openai}
+  "gpt-4o":        {provider: openai}
+  "gpt-5.6-luna":  {provider: openai}
+  "gpt-5-mini":    {provider: openai}
+  "gpt-4.1-mini":  {provider: openai}
+  "gpt-4o-mini":   {provider: openai}
+  "IndicTrans2":   {provider: hf_seq2seq, hf_id: ai4bharat/indictrans2-indic-en-1B, gated: true}
+  "qwen3:32b":     {provider: ollama, approx_vram_gb: 20, disable_thinking: true}
+  "qwen3:30b":     {provider: ollama, approx_vram_gb: 19, disable_thinking: true}
+  "gemma3:27b":    {provider: ollama, approx_vram_gb: 17}
+  "aya-expanse:32b": {provider: ollama, approx_vram_gb: 20}
+  "custom-shloka-mt": {provider: custom, checkpoint: latest}   # resolves newest dir in models/custom/

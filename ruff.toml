@@ -1,0 +1,19 @@
+line-length = 120
+target-version = "py310"
+extend-exclude = ["notebooks"]
+
+[lint]
+select = ["E", "F", "W", "B", "UP", "I", "SIM", "RUF", "BLE", "S", "PL", "ANN"]
+ignore = [
+  "ANN401",          # Any is used deliberately for duck-typed third-party objects
+  "PLR0913", "PLR0912", "PLR0915", "PLR0911", "PLR2004",
+  "PLC0415",         # lazy imports keep heavy optional deps (torch, openai, ...) out of import time
+  "RUF001", "RUF002", "RUF003",  # Indic / typographic characters are intentional
+  "S101",            # asserts only in tests and one guarded invariant
+  "S603", "S607",    # subprocess calls use fixed argument lists
+  "S311",            # random is used for jitter/shuffling, not cryptography
+  "PLR0917",         # dataclass-like constructors take several positional args
+]
+
+[lint.per-file-ignores]
+"tests/*" = ["ANN001", "ANN002", "ANN201", "ANN202", "ANN204", "ANN205", "ANN003", "S105", "S106", "PLW0603", "BLE001"]

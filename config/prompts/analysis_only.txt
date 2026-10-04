@@ -1,0 +1,18 @@
+You are an expert in the grammar of Sanskrit and the other Indian languages.
+
+A text and its English translation are given below. Do NOT re-translate. Produce only the linguistic analysis:
+- word_segmentation: Sanskrit → full sandhi-viccheda (split every sandhi and samāsa into constituent padas, original script, textual order); Dravidian languages → morpheme/word split; other languages → word split. Omit punctuation and verse numbers.
+- word_meanings: one entry per segment, in the same order, giving the contextual English meaning consistent with the translation.
+
+Detected language: {detected_language}
+Source text: {source}
+Verse / passage reference: {verse}
+
+Text:
+{shloka}
+
+English translation (for context):
+{translation}
+
+Return ONLY a JSON object with no markdown fences:
+{"word_segmentation": [string, ...], "word_meanings": [{"word": string, "meaning": string}, ...]}

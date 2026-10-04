@@ -1,0 +1,27 @@
+# secrets
+.env
+.env.*
+!.env.example
+# outputs / logs / caches
+Output_Folder/*
+!Output_Folder/.gitkeep
+logs/*
+!logs/.gitkeep
+.cache/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+# model weights / checkpoints
+models/custom/*
+models/checkpoints/
+!models/custom/README.md
+*.bin
+*.safetensors
+*.pt
+*.ckpt
+*.gguf
+# user training material (may be licensed)
+Training_Data/*
+!Training_Data/README.md
